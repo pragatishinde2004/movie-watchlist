@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Watchlist</title>
+</head>
+<body>
+    <table border="1" cellpadding="8">
+        <tr>
+            <h2>Movies to watch!!</h2>
+            <th>ID</th>
+            <th>Movies</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        {% for movie in movies %}
+        <tr>
+            <!-- <td>{{movie[0]}}</td> -->
+            <td>{{ loop.index }}</td> 
+            <td>{{movie[1]}}</td>
+            <td>{{movie[2]}}</td>
+            <td>
+                <form action="{{ url_for('watched',movie_id=movie[0]) }}" method="POST" style="display:inline;">
+                    <button type="submit">completed</button>
+                </form>
+                <a href="{{ url_for('edit', movie_id=movie[0]) }}">
+                    <button>Edit</button>
+                </a>
+                <form action="{{ url_for('remove', movie_id=movie[0]) }}" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
